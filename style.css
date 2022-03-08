@@ -1,32 +1,36 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	text-decoration: none;
+  }
+
 body {
-	background: #000000;
+	background: rgb(86,90,99);
 	font-family: 'Permanent Marker', cursive;
 }
 
 h1 {
-	color: #FFFFFF;
-	font-size: 3em;
-	margin-left: 10px;
+	color: rgb(168,207,69);
+	font-size: 2.5em;
+	text-align: center;
 }
 
 #imagem-forca {
-	width: 300px;
-}
-
-p {
-	color:  #FFFFFF;
+	display: block;
+	margin: 1em auto;
 }
 
 #palavra-escondida p{
 	display:  inline;
-	font-size: 2.5em;
+	font-size: 2.2em;
 	padding-left: 10px;
+	color:  rgb(237,129,179);
 }
 
-#letras-digitadas p{
-	display:  inline;
-	font-size: 1.5em;
-	padding-left: 10px;
+#palavra-escondida {
+	text-align: center;
+	margin: 1em 0;
 }
 
 .paragrafo {
@@ -36,4 +40,31 @@ p {
 
 #caixa__letra {
 	margin: 0 0px 10px 10px;
+}
+
+.teclado {
+	max-width: 750px;
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+}
+
+.tecla {
+	font-family: 'Permanent Marker', cursive;
+	font-size: 18px;
+	color: rgb(255, 255, 255);
+	width: 38px;
+	height: 38px;
+	background: rgb(150,152,154);
+	border: 2px solid rgb(210, 211, 213);
+	border-radius: 5px;
+	margin: 0.3em 0.25em;
+}
+
+.tecla_acertou:disabled {
+	background: rgba(237,129,179,0.5);
+}
+
+.tecla_errou:disabled {
+	background: rgba(250,243,142,0.5);
 }
