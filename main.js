@@ -27,17 +27,18 @@ for (let i = 0; i < listaDeTeclas.length; i++){
 
 function verifica(tecla){
 	let letraEscolhida = tecla.value;
-	 acertou = false;
+	let acertouLetra = false;
 
 		for (let i = 0; i < palavraSorteada.length; i++){
 			if (letraEscolhida == palavraSorteada.charAt(i)){
 				letraEscondida = document.getElementById(i);
 				letraEscondida.innerHTML = palavraSorteada.charAt(i);
-				acertou = true;
+				acertouLetra = true;
 				letrasAcertadas++;
 			}
 		}
-		if (!acertou && tentativas > 0){
+		
+		if (!acertouLetra && tentativas > 0){
 			tentativas--;
 			let novoSrcImg = `imagens/forca${tentativas}.png`
 			imagem.setAttribute('src', novoSrcImg);
@@ -50,6 +51,13 @@ function verifica(tecla){
 		if (letrasAcertadas == palavraSorteada.length){
 			alert ('Parabéns! Você acertou!');
 		}
+
+		if (acertouLetra){
+			tecla.classList.add('tecla_acertou');
+		} else {
+			tecla.classList.add('tecla_errou');
+		}
+
+		tecla.setAttribute('disabled','true');	
 		
-		tecla.setAttribute('disabled','true');
 }
