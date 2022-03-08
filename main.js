@@ -16,8 +16,8 @@ let letrasAcertadas = 0;
 let letraEscondida = '';
 let tentativas = 7;
 let imagem = document.querySelector('#imagem-forca')
-
 const listaDeTeclas = document.querySelectorAll('.tecla');
+
 for (let i = 0; i < listaDeTeclas.length; i++){
 	let tecla = listaDeTeclas[i];
 	tecla.onclick = function () {
@@ -29,35 +29,37 @@ function verifica(tecla){
 	let letraEscolhida = tecla.value;
 	let acertouLetra = false;
 
-		for (let i = 0; i < palavraSorteada.length; i++){
-			if (letraEscolhida == palavraSorteada.charAt(i)){
-				letraEscondida = document.getElementById(i);
-				letraEscondida.innerHTML = palavraSorteada.charAt(i);
-				acertouLetra = true;
-				letrasAcertadas++;
-			}
+	for (let i = 0; i < palavraSorteada.length; i++){
+		if (letraEscolhida == palavraSorteada.charAt(i)){
+			letraEscondida = document.getElementById(i);
+			letraEscondida.innerHTML = palavraSorteada.charAt(i);
+			acertouLetra = true;
+			letrasAcertadas++;
 		}
-		
-		if (!acertouLetra && tentativas > 0){
-			tentativas--;
-			let novoSrcImg = `imagens/forca${tentativas}.png`
-			imagem.setAttribute('src', novoSrcImg);
-		}
+	}
+	
+	if (!acertouLetra && tentativas > 0){
+		tentativas--;
+		let novoSrcImg = `imagens/forca${tentativas}.png`
+		imagem.setAttribute('src', novoSrcImg);
+	}
 
-		if (tentativas == 0){
-			alert ('Suas tentativas acabaram! A palavra é ' + palavraSorteada);
-		}
+	if (tentativas == 0){
+		const resultado = document.querySelector('#resultado');
+		resultado.innerHTML = `Suas tentativas acabaram! A palavra é ${palavraSorteada}`;
+		listaDeTeclas.forEach(botao => botao.setAttribute('disabled','true'));
+	}
 
-		if (letrasAcertadas == palavraSorteada.length){
-			alert ('Parabéns! Você acertou!');
-		}
-
-		if (acertouLetra){
-			tecla.classList.add('tecla_acertou');
-		} else {
-			tecla.classList.add('tecla_errou');
-		}
-
-		tecla.setAttribute('disabled','true');	
-		
+	if (letrasAcertadas == palavraSorteada.length){
+		const resultado = document.querySelector('#resultado');
+		resultado.innerHTML = 'Parabéns!!! Você acertou!';
+		listaDeTeclas.forEach(botao => botao.setAttribute('disabled','true'));
+	}
+	
+	tecla.setAttribute('disabled','true');
+	if (acertouLetra){
+		tecla.classList.add('tecla_acertou');
+	} else {
+		tecla.classList.add('tecla_errou');
+	}	
 }
