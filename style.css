@@ -1,0 +1,39 @@
+body {
+	background: #000000;
+	font-family: 'Permanent Marker', cursive;
+}
+
+h1 {
+	color: #FFFFFF;
+	font-size: 3em;
+	margin-left: 10px;
+}
+
+#imagem-forca {
+	width: 300px;
+}
+
+p {
+	color:  #FFFFFF;
+}
+
+#palavra-escondida p{
+	display:  inline;
+	font-size: 2.5em;
+	padding-left: 10px;
+}
+
+#letras-digitadas p{
+	display:  inline;
+	font-size: 1.5em;
+	padding-left: 10px;
+}
+
+.paragrafo {
+	font-size: 1.5em;
+	margin: 20px 10px 0;
+}
+
+#caixa__letra {
+	margin: 0 0px 10px 10px;
+}
