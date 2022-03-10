@@ -59,6 +59,14 @@ function desabilitaTodasAsTeclas(){
 	listaDeTeclas.forEach(tecla => tecla.setAttribute('disabled','true'));
 }
 
+function mostraBotaoRecarregar(){
+	let btn = document.querySelector('.refresh');
+	btn.onclick = function(){
+		location.reload();
+	}
+	btn.classList.add('mostra_btn');
+}
+
 function verifica(tecla){
 	letraEscolhida = tecla.value;
 	tecla.setAttribute('disabled','true');
@@ -76,5 +84,6 @@ function verifica(tecla){
 	if (fimDoJogo()){
 		imprimeResultado();
 		desabilitaTodasAsTeclas();
+		mostraBotaoRecarregar();
 	}
 }
