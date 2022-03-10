@@ -1,18 +1,19 @@
 
 const palavras = ["algoritmo", "alicate", "dinossauro", "computador", "girafa", "mochila", "impressora", "tradutor", "porcelana", "frigideira"];
-const palavraSorteada = palavras[Math.floor(Math.random()*palavras.length)].toUpperCase();
-let letrasAcertadas = 0;
-let letraEscondida;
+
 let letraEscolhida;
+let acertosJogada;
+let acertosTotal = 0;
 let tentativas = 7;
-let imagem = document.querySelector('#imagem-forca')
-const resultado = document.querySelector('#resultado');
+
+const palavraSorteada = palavras[Math.floor(Math.random()*palavras.length)].toUpperCase();
+
 const listaDeTeclas = document.querySelectorAll('.tecla');
 listaDeTeclas.forEach( tecla => tecla.onclick = function(){verifica(tecla)});
 
 console.log(palavraSorteada);
-criaEspacoPalavra();
 
+criaEspacoPalavra();
 function criaEspacoPalavra(){
 	for (let i = 0; i < palavraSorteada.length; i++){
 		let espaco = document.createElement('p');
@@ -23,34 +24,39 @@ function criaEspacoPalavra(){
 }
 
 function imprimeLetra(){
+	acertosJogada = 0;
 	for (let i = 0; i < palavraSorteada.length; i++){
 		if (letraEscolhida == palavraSorteada.charAt(i)){
-			letraEscondida = document.getElementById(i);
-			letraEscondida.innerHTML = palavraSorteada.charAt(i);
-			letrasAcertadas++;
+			let espaco = document.getElementById(i);
+			espaco.innerHTML = palavraSorteada.charAt(i);
+			acertosJogada++;
 		}
 	}
 }
 
 function desenhaForca(){
-	tentativas--;
+	let imagem = document.querySelector('#imagem-forca')
 	let novoSrcImg = `imagens/forca${tentativas}.png`
 	imagem.setAttribute('src', novoSrcImg);
 }
 
 function fimDoJogo(){
-	if (letrasAcertadas == palavraSorteada.length || tentativas == 0){
-		listaDeTeclas.forEach(botao => botao.setAttribute('disabled','true'));
+	if (acertosTotal == palavraSorteada.length || tentativas == 0){
 		return true;
 	}
 }
 
 function imprimeResultado(){
-	if (letrasAcertadas == palavraSorteada.length){
+	const resultado = document.querySelector('#resultado');
+	if (acertosTotal == palavraSorteada.length){
 		resultado.innerHTML = 'Parabéns!!! Você acertou!';
 	} else if (tentativas == 0){
 		resultado.innerHTML = `Suas tentativas acabaram! A palavra é ${palavraSorteada}`;
 	}
+}
+
+function desabilitaTodasAsTeclas(){
+	listaDeTeclas.forEach(tecla => tecla.setAttribute('disabled','true'));
 }
 
 function verifica(tecla){
@@ -59,13 +65,16 @@ function verifica(tecla){
 
 	if (palavraSorteada.includes(letraEscolhida)){
 		imprimeLetra();
+		acertosTotal += acertosJogada;
 		tecla.classList.add('tecla_acertou');
 	} else {
+		tentativas--;
 		desenhaForca();
 		tecla.classList.add('tecla_errou');
 	}
 
 	if (fimDoJogo()){
 		imprimeResultado();
+		desabilitaTodasAsTeclas();
 	}
 }
