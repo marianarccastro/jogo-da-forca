@@ -41,7 +41,7 @@ h1 {
 	display: block;
 }
 
-.refresh {
+.btn_reset {
 	color: rgb(44, 43, 43);
 	font-family: 'Patrick Hand', cursive;
 	display: none;

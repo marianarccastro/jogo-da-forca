@@ -1,17 +1,19 @@
-
 const palavras = ["algoritmo", "alicate", "dinossauro", "computador", "girafa", "mochila", "impressora", "tradutor", "porcelana", "frigideira"];
 
+let palavraSorteada;
 let letraEscolhida;
 let acertosJogada;
 let acertosTotal = 0;
 let tentativas = 7;
 
-const palavraSorteada = palavras[Math.floor(Math.random()*palavras.length)].toUpperCase();
+sorteiaPalavra();
+function sorteiaPalavra(){
+	palavraSorteada = palavras[Math.floor(Math.random()*palavras.length)].toUpperCase();
+	console.log(palavraSorteada);
+}
 
 const listaDeTeclas = document.querySelectorAll('.tecla');
 listaDeTeclas.forEach( tecla => tecla.onclick = function(){verifica(tecla)});
-
-console.log(palavraSorteada);
 
 criaEspacoPalavra();
 function criaEspacoPalavra(){
@@ -60,10 +62,8 @@ function desabilitaTodasAsTeclas(){
 }
 
 function mostraBotaoRecarregar(){
-	let btn = document.querySelector('.refresh');
-	btn.onclick = function(){
-		location.reload();
-	}
+	let btn = document.querySelector('.btn_reset');
+	btn.onclick = reset;
 	btn.classList.add('mostra_btn');
 }
 
@@ -86,4 +86,19 @@ function verifica(tecla){
 		desabilitaTodasAsTeclas();
 		mostraBotaoRecarregar();
 	}
+}
+
+function reset(){
+	acertosTotal = 0;
+	tentativas = 7;
+	document.querySelector('#palavra-escondida').innerHTML='';
+	document.querySelector('#resultado').innerHTML='';
+	document.querySelector('.btn_reset').classList.remove('mostra_btn');
+	desenhaForca();
+	sorteiaPalavra();
+	criaEspacoPalavra();
+	listaDeTeclas.forEach(tecla => {
+		tecla.removeAttribute('disabled');
+		tecla.classList.remove('tecla_acertou', 'tecla_errou');
+	})
 }
